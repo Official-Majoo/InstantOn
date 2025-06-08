@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --fnbb-primary: #002F6C;    /* Dark blue */
+    --fnbb-secondary: #FF6720;  /* Orange */
+    --fnbb-success: #28a745;    /* Green */
+    --fnbb-info: #17a2b8;       /* Light blue */
+    --fnbb-warning: #ffc107;    /* Yellow */
+    --fnbb-danger: #dc3545;     /* Red */
+    --fnbb-light: #f8f9fa;
+    --fnbb-dark: #343a40;
+}
+
+/* Override Bootstrap colors with FNBB branding */
+.btn-primary {
+    background-color: var(--fnbb-primary);
+    border-color: var(--fnbb-primary);
+}
+
+.btn-secondary {
+    background-color: var(--fnbb-secondary);
+    border-color: var(--fnbb-secondary);
+}
+
+.text-primary {
+    color: var(--fnbb-primary) !important;
+}
+
+.text-secondary {
+    color: var(--fnbb-secondary) !important;
+}
+
+/* Add specific styling for the verification components */
+.verification-result {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.camera-container {
+    position: relative;
+    background-color: #000;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+}
+
+.face-outline {
+    width: 220px;
+    height: 220px;
+    border: 3px dashed rgba(255, 255, 255, 0.7);
+    border-radius: 50%;
+    position: relative;
+}

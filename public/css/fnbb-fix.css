@@ -1,0 +1,365 @@
+/* FNBB Brand Colors */
+:root {
+    --fnbb-blue: #009CB4;
+    --fnbb-blue-dark: #007A8C;
+    --fnbb-orange: #F6921E;
+    --fnbb-orange-dark: #E67E00;
+    --fnbb-navy: #003865;
+    --fnbb-light-grey: #F5F5F5;
+    --fnbb-grey: #757575;
+    --fnbb-black: #222222;
+    --fnbb-white: #FFFFFF;
+    --fnbb-success: #34A853;
+    --fnbb-error: #EA4335;
+}
+
+/* Basic Reset & Typography */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Open Sans', Arial, sans-serif;
+    line-height: 1.6;
+    color: var(--fnbb-black);
+    background-color: var(--fnbb-light-grey);
+    padding: 0;
+    margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', Arial, sans-serif;
+    color: var(--fnbb-navy);
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+a {
+    color: var(--fnbb-blue);
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--fnbb-orange);
+}
+
+/* Layout */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* Header */
+header {
+    background-color: var(--fnbb-navy);
+    padding: 1rem 0;
+    color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.site-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.logo a {
+    color: white;
+    font-weight: bold;
+    font-size: 1.5rem;
+    text-decoration: none;
+}
+
+.nav-links {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+}
+
+.nav-links a:hover {
+    color: var(--fnbb-orange);
+}
+
+/* Page Title */
+.page-title {
+    background-color: white;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+}
+
+/* Registration Process Section */
+.registration-section {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+}
+
+.section-header {
+    padding: 1.5rem;
+    background-color: var(--fnbb-blue);
+    color: white;
+    border-radius: 8px 8px 0 0;
+    margin: -2rem -2rem 2rem -2rem;
+}
+
+.section-header h3 {
+    color: white;
+    margin-bottom: 0.5rem;
+}
+
+/* Lists */
+.numbered-list, .bullet-list {
+    padding-left: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.numbered-list li, .bullet-list li {
+    margin-bottom: 0.5rem;
+    color: var(--fnbb-grey);
+}
+
+/* Progress Bar and Steps */
+.progress-container {
+    margin: 2rem 0;
+}
+
+.progress-bar {
+    height: 8px;
+    background-color: #e9ecef;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background-color: var(--fnbb-blue);
+    border-radius: 4px;
+    transition: width 0.3s ease;
+}
+
+.step-indicator {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+}
+
+.step-indicator::before {
+    content: "";
+    position: absolute;
+    top: 15px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: #e9ecef;
+    z-index: 1;
+}
+
+.step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+    padding: 0 8px;
+    background-color: white;
+}
+
+.step-circle {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #e9ecef;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: var(--fnbb-grey);
+}
+
+.step.active .step-circle {
+    background-color: var(--fnbb-blue);
+    color: white;
+}
+
+.step-label {
+    font-size: 0.85rem;
+    color: var(--fnbb-grey);
+    text-align: center;
+}
+
+.step.active .step-label {
+    color: var(--fnbb-blue);
+    font-weight: 600;
+}
+
+/* Form Elements */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.form-control:focus {
+    border-color: var(--fnbb-blue);
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 156, 180, 0.25);
+}
+
+.form-text {
+    display: block;
+    margin-top: 0.25rem;
+    font-size: 0.875rem;
+    color: var(--fnbb-grey);
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    font-weight: 500;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 4px;
+    transition: all 0.15s ease-in-out;
+    cursor: pointer;
+}
+
+.btn-primary {
+    color: white;
+    background-color: var(--fnbb-blue);
+    border-color: var(--fnbb-blue);
+}
+
+.btn-primary:hover {
+    background-color: var(--fnbb-blue-dark);
+    border-color: var(--fnbb-blue-dark);
+}
+
+/* Footer */
+footer {
+    background-color: var(--fnbb-navy);
+    color: white;
+    padding: 1.5rem 0;
+    margin-top: 3rem;
+}
+
+.footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-links {
+    display: flex;
+    gap: 20px;
+}
+
+.footer-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 0.875rem;
+}
+
+.footer-links a:hover {
+    color: var(--fnbb-orange);
+}
+
+.copyright {
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+}
+
+/* Registration Wizard */
+.registration-wizard {
+    margin-top: 2rem;
+}
+
+/* Step display and form layout */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+/* Navigation buttons */
+.nav-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+}
+
+/* Fix for the current layout issues */
+#account-form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.form-field {
+    margin-bottom: 1rem;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="tel"],
+select {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+/* This specifically targets the issues seen in the screenshot */
+.step-indicator {
+    display: flex;
+    justify-content: space-between;
+    margin: 2rem 0;
+}
+
+.account-section,
+.verify-section,
+.documents-section,
+.facial-section,
+.details-section {
+    padding: 1rem;
+    background-color: white;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+}
+
+/* Fix for footer links */
+.footer-links a {
+    margin-right: 15px;
+}
