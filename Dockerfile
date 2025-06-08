@@ -34,6 +34,10 @@ COPY . .
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 RUN chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 
+# Run migrations and seeders
+RUN php artisan migrate --force
+RUN php artisan db:seed --force
+
 # Enable Apache mod_rewrite
 RUN a2enmod rewrite
 
