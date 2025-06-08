@@ -37,15 +37,23 @@ RUN composer install --no-dev --no-scripts --optimize-autoloader
 # Copy application code
 COPY . .
 
-# Set permissions (more comprehensive)
-RUN chown -R www-data:www-data /var/www/html
-RUN chmod -R 755 /var/www/html
-RUN chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
+# Create storage directories and set proper permissions
+RUN mkdir -p /var/www/html/storage/logs \
+    && mkdir -p /var/www/html/storage/framework/cache \
+    && mkdir -p /var/www/html/storage/framework/sessions \
+    && mkdir -p /var/www/html/storage/framework/views \
+    && mkdir -p /var/www/html/bootstrap/cache
+
+# Set comprehensive permissions
+RUN chown -R www-data:www-data /var/www/html \
+    && chmod -R 755 /var/www/html \
+    && chmod -R 775 /var/www/html/storage \
+    && chmod -R 775 /var/www/html/bootstrap/cache
 
 # Enable Apache mod_rewrite
 RUN a2enmod rewrite
 
-# Create Apache virtual host config with error logging
+# Create Apache virtual host config
 RUN echo '<VirtualHost *:80>\n\
     DocumentRoot /var/www/html/public\n\
     <Directory /var/www/html/public>\n\
@@ -54,28 +62,40 @@ RUN echo '<VirtualHost *:80>\n\
     </Directory>\n\
     ErrorLog /dev/stderr\n\
     CustomLog /dev/stdout combined\n\
-    LogLevel info\n\
 </VirtualHost>' > /etc/apache2/sites-available/000-default.conf
 
-# Enable PHP error reporting
-RUN echo 'display_errors = On\n\
-log_errors = On\n\
-error_log = /dev/stderr' > /usr/local/etc/php/conf.d/error-logging.ini
-
-# Create improved startup script with error handling
+# Create startup script with better error handling
 RUN echo '#!/bin/bash\n\
 set -e\n\
 echo "=== Starting Laravel Application ==="\n\
+\n\
+# Ensure proper permissions\n\
+chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache\n\
+chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache\n\
+\n\
+# Clear caches\n\
 echo "Clearing caches..."\n\
-php artisan config:clear || echo "Config clear failed"\n\
-php artisan cache:clear || echo "Cache clear failed"\n\
+php artisan config:clear\n\
+php artisan cache:clear\n\
+php artisan view:clear\n\
+\n\
+# Wait a moment for database to be ready\n\
+echo "Waiting for database..."\n\
+sleep 10\n\
+\n\
+# Test database connection\n\
+echo "Testing database connection..."\n\
+php artisan migrate:status || echo "Database connection failed"\n\
+\n\
+# Run migrations\n\
 echo "Running migrations..."\n\
-php artisan migrate --force || echo "Migration failed - continuing anyway"\n\
+php artisan migrate --force || echo "Migration failed"\n\
+\n\
+# Run seeders\n\
 echo "Running seeders..."\n\
-php artisan db:seed --force || echo "Seeding failed - continuing anyway"\n\
-echo "Caching configuration for production..."\n\
-php artisan config:cache || echo "Config cache failed"\n\
-echo "Starting Apache web server..."\n\
+php artisan db:seed --force || echo "Seeding failed"\n\
+\n\
+echo "Starting Apache..."\n\
 exec apache2-foreground' > /usr/local/bin/start.sh
 
 RUN chmod +x /usr/local/bin/start.sh
